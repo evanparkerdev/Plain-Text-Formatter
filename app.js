@@ -150,4 +150,6 @@ function main() {
   render();
 }
 
-document.addEventListener("DOMContentLoaded", main);
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", main);
+}
