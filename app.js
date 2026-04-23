@@ -117,6 +117,35 @@ function generateMessyExampleText() {
   return samples[Math.floor(Math.random() * samples.length)];
 }
 
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+
+function defaultDownloadName() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = pad2(d.getMonth() + 1);
+  const day = pad2(d.getDate());
+  const hh = pad2(d.getHours());
+  const mm = pad2(d.getMinutes());
+  return `cleaned-${y}${m}${day}-${hh}${mm}.txt`;
+}
+
+function downloadTextAsFile(text, filename) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  try {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename || "cleaned.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 function main() {
   const inputEl = document.getElementById("inputText");
   const outputEl = document.getElementById("outputText");
@@ -125,6 +154,7 @@ function main() {
   const btnCopy = document.getElementById("btnCopy");
   const btnClear = document.getElementById("btnClear");
   const btnExample = document.getElementById("btnExample");
+  const btnDownload = document.getElementById("btnDownload");
 
   const optTrimLines = document.getElementById("optTrimLines");
   const optCollapseSpaces = document.getElementById("optCollapseSpaces");
@@ -178,6 +208,16 @@ function main() {
     render();
     setStatus("Example generated");
     inputEl.focus();
+  });
+
+  btnDownload?.addEventListener("click", () => {
+    const text = outputEl.value ?? "";
+    if (!text) {
+      setStatus("Nothing to download");
+      return;
+    }
+    downloadTextAsFile(text, defaultDownloadName());
+    setStatus("Downloaded");
   });
 
   btnCopy.addEventListener("click", async () => {
