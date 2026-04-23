@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Text Cleaner</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Text Cleaner</h1>
+        <p class="subtitle">Remove extra spaces, empty lines, and normalize spacing.</p>
+      </header>
+
+      <section class="panel">
+        <div class="toolbar">
+          <div class="toggles" role="group" aria-label="Formatting options">
+            <label class="toggle">
+              <input id="optTrimLines" type="checkbox" checked />
+              <span>Trim line edges</span>
+            </label>
+            <label class="toggle">
+              <input id="optCollapseSpaces" type="checkbox" checked />
+              <span>Collapse spaces/tabs</span>
+            </label>
+            <label class="toggle">
+              <input id="optCollapseBlankLines" type="checkbox" checked />
+              <span>Collapse blank lines</span>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="btnClear" class="btn btn-ghost" type="button">Clear</button>
+            <button id="btnCopy" class="btn btn-primary" type="button">
+              Copy cleaned text
+            </button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="inputText">Raw input</label>
+            <textarea
+              id="inputText"
+              spellcheck="false"
+              placeholder="Paste or type raw text here…"
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label for="outputText">Cleaned output</label>
+            <textarea id="outputText" readonly spellcheck="false"></textarea>
+            <div class="status" aria-live="polite">
+              <span id="statusText">Ready</span>
+              <span class="spacer"></span>
+              <span id="statsText" class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
