@@ -81,6 +81,13 @@ body {
   padding: 6px 4px 14px;
 }
 
+.toolbar-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .toggles {
   display: flex;
   gap: 12px;

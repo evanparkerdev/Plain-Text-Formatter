@@ -85,6 +85,38 @@ function computeStats(before, after) {
   };
 }
 
+function generateMessyExampleText() {
+  const samples = [
+    [
+      "  Hello,   world!   ",
+      "",
+      "",
+      "\tThis\t\tline  has\t tabs   and    spaces. ",
+      "  Here   are   multiple     spaces.  ",
+      "",
+      "List:",
+      "  -  item   one",
+      "  -    item\t\t two",
+      "",
+      "Signature:   John   Doe   ",
+    ].join("\r\n"),
+    [
+      "    Quick notes:",
+      "",
+      "  Call   me   at:\t(555)   123-4567",
+      "",
+      "",
+      "Address:\t\t123   Main St.",
+      "  Suite    500",
+      "",
+      "Thanks,",
+      "   Alex",
+    ].join("\n"),
+  ];
+
+  return samples[Math.floor(Math.random() * samples.length)];
+}
+
 function main() {
   const inputEl = document.getElementById("inputText");
   const outputEl = document.getElementById("outputText");
@@ -92,6 +124,7 @@ function main() {
   const statsEl = document.getElementById("statsText");
   const btnCopy = document.getElementById("btnCopy");
   const btnClear = document.getElementById("btnClear");
+  const btnExample = document.getElementById("btnExample");
 
   const optTrimLines = document.getElementById("optTrimLines");
   const optCollapseSpaces = document.getElementById("optCollapseSpaces");
@@ -137,6 +170,13 @@ function main() {
     inputEl.value = "";
     render();
     setStatus("Cleared");
+    inputEl.focus();
+  });
+
+  btnExample?.addEventListener("click", () => {
+    inputEl.value = generateMessyExampleText();
+    render();
+    setStatus("Example generated");
     inputEl.focus();
   });
 
