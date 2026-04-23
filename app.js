@@ -160,6 +160,9 @@ function main() {
   const optCollapseSpaces = document.getElementById("optCollapseSpaces");
   const optCollapseBlankLines = document.getElementById("optCollapseBlankLines");
 
+  const footerYear = document.getElementById("footerYear");
+  if (footerYear) footerYear.textContent = String(new Date().getFullYear());
+
   function getOpts() {
     return {
       trimLines: Boolean(optTrimLines.checked),
